@@ -2,7 +2,8 @@
     function processForm( e ){
         var dict = {
         	Title : this["title"].value,
-        	Director: this["director"].value
+            Director: this["director"].value,
+            Genre: this["genre"].value
         };
 
         $.ajax({
@@ -12,7 +13,10 @@
             contentType: 'application/json',
             data: JSON.stringify(dict),
             success: function( data, textStatus, jQxhr ){
-                $('#response pre').html( data );
+                let datastring = JSON.stringify(data);
+
+                $('#response pre').html( datastring );
+                console.log(datastring);
             },
             error: function( jqXhr, textStatus, errorThrown ){
                 console.log( errorThrown );
@@ -23,4 +27,5 @@
     }
 
     $('#my-form').submit( processForm );
-})(jQuery);
+}
+)(jQuery);
