@@ -31,9 +31,9 @@ namespace WebAPISample.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            // Retrieve movie by id from db logic
-            // return Ok(movie);
-            return Ok();
+            var movie = _context.Movies.Where(m => m.MovieId == id).FirstOrDefault();
+            //maybe we need to check if empty?
+            return Ok(movie);
         }
 
         // POST api/movie
