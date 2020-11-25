@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "8d529a7a-edeb-4022-bb88-22752ef2c476",
+		"name": "Movie DB Test Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://localhost:44325/api/movie/2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44325/api/movie/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44325",
+					"path": [
+						"api",
+						"movie",
+						"2"
+					]
+				},
+				"description": "Get(id) test"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
