@@ -26,3 +26,27 @@
     $('#my-form').submit( processForm );
 }
 )(jQuery);
+
+(function($){
+    function getMovieList( e ){
+        $.ajax({
+            url: 'https://localhost:44325/api/movie',
+            dataType: 'json',
+            type: 'get',
+            contentType: 'application/json',
+            success: function( data, textStatus, jQxhr ){
+                data.forEach(movie => {
+                    $('#tablehead').after("<tr><td>" + movie.title + "</td><td>" + movie.director + "</td><td>" + movie.genre + "</td></tr>")
+                });
+            },
+            error: function( jqXhr, textStatus, errorThrown ){
+                console.log( errorThrown );
+            }
+        });
+
+        e.preventDefault();
+    }
+
+    $('#showlist').click( getMovieList );
+}
+)(jQuery);
