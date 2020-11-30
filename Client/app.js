@@ -1,4 +1,5 @@
 (function ($) {
+    let movieArray = [];
     getMovieList();
     function processForm(e) {
         var dict = {
@@ -58,23 +59,24 @@
                             
                             <div class='form-group mt-3'>
                             <label for='${movie.title}Input'>Movie Title</label>
-                            <input type="text" name="title" id='${movie.title}Input' placeholder="${movie.title}" />
+                            <input type="text" name="title" id='${movie.movieId}TitleInput' placeholder="${movie.title}" />
                             <br>
                             <label for='${movie.director}Input' class='mt-2'>Director</label>
-                            <input type="text" name="director" id='${movie.director}Input' placeholder="${movie.director}" />
+                            <input type="text" name="director" id='${movie.movieId}DirectorInput' placeholder="${movie.director}" />
                             <br>
                             <label for='${movie.genre}Input' class='mt-2'>Genre</label>
-                            <input type="text" name="genre" id='${movie.genre}Input' placeholder="${movie.genre}" />
+                            <input type="text" name="genre" id='${movie.movieId}GenreInput' placeholder="${movie.genre}" />
 
-                            <button type="submit" class='btn btn-danger mt-3'>Confirm Change</button>
+                            <button type="submit"  class='edit btn btn-danger mt-3'>Confirm Change</button>
                             </div>
                             </form>
                             </div>
                         </div>
                     </div>
                     `)
-
+                    
                 });
+            movieArray = data;
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -85,11 +87,33 @@
 
 
 
-    function getMovieDetails() {
-        $.ajax({
+//     function editMovieDetails(data) {
+//         var dict = {
+//             Title: data.title,
+//             Director: data.director,
+//             Genre: data.genre
+//         };
 
-        })
-    }
+//         $.ajax({
+//             url: 'https://localhost:44325/api/movie',
+//             dataType: 'json',
+//             type: 'put',
+//             contentType: 'application/json',
+//             data: JSON.stringify(dict),
+//             success: function (data, textStatus, jQxhr) {
 
-}
+//             },
+//             error: function (jqXhr, textStatus, errorThrown) {
+//                 console.log(errorThrown);
+//             }
+//         });
+
+//         e.preventDefault();
+//     }
+//     $('.edit').click(function(){
+//         var form = $(this).parents('form:first');
+//         console.log(form);
+//     });
+
+// }
 )(jQuery);
