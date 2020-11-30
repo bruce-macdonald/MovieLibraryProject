@@ -1,7 +1,8 @@
-(function($){
-    function processForm( e ){
+(function ($) {
+    getMovieList();
+    function processForm(e) {
         var dict = {
-        	Title : this["title"].value,
+            Title: this["title"].value,
             Director: this["director"].value,
             Genre: this["genre"].value
         };
@@ -12,41 +13,53 @@
             type: 'post',
             contentType: 'application/json',
             data: JSON.stringify(dict),
-            success: function( data, textStatus, jQxhr ){
-                $('#response pre').html("Movie successfully added - Title: " + data.title + " - Director: " + data.director + " - Genre: " + data.genre );
+            success: function (data, textStatus, jQxhr) {
+                $('#response pre').html("Movie successfully added - Title: " + data.title + " - Director: " + data.director + " - Genre: " + data.genre);
+                $(`#movieCards`).prepend(`<div class = 'card' style = 'width: 18rem;'>
+                <img class = 'card-img-top' src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1280px-SNice.svg.png'alt = 'smiley face'>
+                <div class = 'card-body'> <h5 class = 'card-title'>${data.title}</h5>
+                <p class= 'card-text'>ABC</p>
+                <a href='#' class='btn btn-primary'>Go somewhere</a>
+                </div>
+                </div>`
+                )
             },
-            error: function( jqXhr, textStatus, errorThrown ){
-                console.log( errorThrown );
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
             }
         });
 
         e.preventDefault();
     }
 
-    $('#my-form').submit( processForm );
-}
-)(jQuery);
+    $('#my-form').submit(processForm);
 
-(function($){
-    function getMovieList( e ){
+    function getMovieList() {
         $.ajax({
             url: 'https://localhost:44325/api/movie',
             dataType: 'json',
             type: 'get',
             contentType: 'application/json',
-            success: function( data, textStatus, jQxhr ){
+            success: function (data, textStatus, jQxhr) {
                 data.forEach(movie => {
-                    $('#tablehead').after("<tr><td>" + movie.title + "</td><td>" + movie.director + "</td><td>" + movie.genre + "</td></tr>")
+                    $(`#movieCards`).prepend(`<div class = 'card' style = 'width: 18rem;'><img class = 'card-img-top' src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1280px-SNice.svg.png'alt = 'smiley face'><div class = 'card-body'> <h5 class = 'card-title'>${movie.title}</h5> <p class= 'card-text'>ABC</p><a href='#' class='btn btn-primary'>Go somewhere</a></div></div>`)
+
                 });
             },
-            error: function( jqXhr, textStatus, errorThrown ){
-                console.log( errorThrown );
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
             }
         });
 
-        e.preventDefault();
+        // e.preventDefault();
     }
 
-    $('#showlist').click( getMovieList );
 }
 )(jQuery);
+
+// (function($){
+
+
+
+// }
+// )(jQuery);
