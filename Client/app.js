@@ -13,10 +13,7 @@
             contentType: 'application/json',
             data: JSON.stringify(dict),
             success: function( data, textStatus, jQxhr ){
-                let datastring = JSON.stringify(data);
-
-                $('#response pre').html( datastring );
-                console.log(datastring);
+                $('#response pre').html("Movie successfully added - Title: " + data.title + " - Director: " + data.director + " - Genre: " + data.genre );
             },
             error: function( jqXhr, textStatus, errorThrown ){
                 console.log( errorThrown );
