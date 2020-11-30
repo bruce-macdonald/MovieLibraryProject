@@ -55,11 +55,19 @@
                             
                             <div id='${movie.movieId}Collapse' class='collapse'>
                             <form id="${movie.movieId}-form">
-                            <input type="text" name="title" placeholder="${movie.title}" />
-                            <input type="text" name="director" placeholder="${movie.director}" />
-                            <input type="text" name="genre" placeholder="${movie.genre}" />
+                            
+                            <div class='form-group mt-3'>
+                            <label for='${movie.title}Input'>Movie Title</label>
+                            <input type="text" name="title" id='${movie.title}Input' placeholder="${movie.title}" />
+                            <br>
+                            <label for='${movie.director}Input' class='mt-2'>Director</label>
+                            <input type="text" name="director" id='${movie.director}Input' placeholder="${movie.director}" />
+                            <br>
+                            <label for='${movie.genre}Input' class='mt-2'>Genre</label>
+                            <input type="text" name="genre" id='${movie.genre}Input' placeholder="${movie.genre}" />
 
-                            <button type="submit">Submit</button>
+                            <button type="submit" class='btn btn-danger mt-3'>Confirm Change</button>
+                            </div>
                             </form>
                             </div>
                         </div>
