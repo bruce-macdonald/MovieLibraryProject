@@ -55,21 +55,19 @@
                             <a href='#${movie.movieId}Collapse' class='btn btn-primary mt-2' data-toggle='collapse' aria-expanded='false' aria-controls='collapseExample' role='button' id='${movie.movieId}-button'>Edit</a>
                             
                             <div id='${movie.movieId}Collapse' class='collapse'>
-                            <form id="${movie.movieId}-form">
                             
                             <div class='form-group mt-3'>
                             <label for='${movie.title}Input'>Movie Title</label>
-                            <input type="text" name="title" id='${movie.movieId}TitleInput' placeholder="${movie.title}" />
+                            <input type="text" name="title" id='title-${movie.movieId}' placeholder="${movie.title}" />
                             <br>
                             <label for='${movie.director}Input' class='mt-2'>Director</label>
-                            <input type="text" name="director" id='${movie.movieId}DirectorInput' placeholder="${movie.director}" />
+                            <input type="text" name="director" id='director-${movie.movieId}' placeholder="${movie.director}" />
                             <br>
                             <label for='${movie.genre}Input' class='mt-2'>Genre</label>
-                            <input type="text" name="genre" id='${movie.movieId}GenreInput' placeholder="${movie.genre}" />
+                            <input type="text" name="genre" id='genre-${movie.movieId}' placeholder="${movie.genre}" />
 
-                            <button type="submit"  class='edit btn btn-danger mt-3'>Confirm Change</button>
+                            <button onclick='editMovieDetails(${movie.movieId})'  class='btn btn-danger mt-3'>Confirm Change</button>
                             </div>
-                            </form>
                             </div>
                         </div>
                     </div>
@@ -87,33 +85,32 @@
 
 
 
-//     function editMovieDetails(data) {
-//         var dict = {
-//             Title: data.title,
-//             Director: data.director,
-//             Genre: data.genre
-//         };
+    function editMovieDetails(id) {
+        var title = $('#title-'+ id ).value();
+        console.log(title);
+        var dict = {
+            Title: $('#title-'+id),
+            Director: data.director,
+            Genre: data.genre
+        };
 
-//         $.ajax({
-//             url: 'https://localhost:44325/api/movie',
-//             dataType: 'json',
-//             type: 'put',
-//             contentType: 'application/json',
-//             data: JSON.stringify(dict),
-//             success: function (data, textStatus, jQxhr) {
+        $.ajax({
+            url: 'https://localhost:44325/api/movie', 
+            dataType: 'json',
+            type: 'put',
+            contentType: 'application/json',
+            data: JSON.stringify(dict),
+            success: function (data, textStatus, jQxhr) {
 
-//             },
-//             error: function (jqXhr, textStatus, errorThrown) {
-//                 console.log(errorThrown);
-//             }
-//         });
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
 
-//         e.preventDefault();
-//     }
-//     $('.edit').click(function(){
-//         var form = $(this).parents('form:first');
-//         console.log(form);
-//     });
+        e.preventDefault();
+    }
 
-// }
+
+}
 )(jQuery);
