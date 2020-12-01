@@ -1,6 +1,5 @@
 "use strict"
 var movieArray = [];
-
 (function ($) {
     getMovieList();
 }
@@ -29,10 +28,8 @@ function processForm(e) {
             console.log(errorThrown);
         }
     });
-
     e.preventDefault();
 }
-
 $('#my-form').submit(processForm);
 
 function getMovieList() {
@@ -45,9 +42,8 @@ function getMovieList() {
             movieArray = movies;
             $('#movieCards').html("");
             movieArray.forEach(movie => {
-               displayMovie(movie);
+                displayMovie(movie);
             });
-
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -55,45 +51,44 @@ function getMovieList() {
     });
 }
 
-function search(e){
+function search(e) {
     var searchType = this["searchtype"].value;
     var searchString = this["searchbox"].value.toLowerCase();
     let foundMovies = [];
-
-    switch(searchType){
-        case'genre':
-        foundMovies = movieArray.filter(function(movie){
-            var genre = movie.genre.toLowerCase();
-            if(genre.search(searchString) >= 0){
-                return true;
-            }else{
-                return false;
-            }
-        });
-        break;
-
-        case'director':
-        foundMovies = movieArray.filter(function(movie){
-            var director = movie.director.toLowerCase();
-            if(director.search(searchString) >= 0){
-                return true;
-            }else{
-                return false;
-            }
-        });
-        break;
-
-        case'title':
-        foundMovies = movieArray.filter(function(movie){
-            var title = movie.title.toLowerCase();
-            if(title.search(searchString) >= 0){
-                return true;
-            }else{
-                return false;
-            }
-        });
-        break;
-
+    switch (searchType) {
+        case 'genre':
+            foundMovies = movieArray.filter(function (movie) {
+                var genre = movie.genre.toLowerCase();
+                if (genre.search(searchString) >= 0) {
+                    return true;
+                } 
+                else {
+                    return false;
+                }
+            });
+            break;
+        case 'director':
+            foundMovies = movieArray.filter(function (movie) {
+                var director = movie.director.toLowerCase();
+                if (director.search(searchString) >= 0) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            });
+            break;
+        case 'title':
+            foundMovies = movieArray.filter(function (movie) {
+                var title = movie.title.toLowerCase();
+                if (title.search(searchString) >= 0) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            });
+            break;
     }
     console.log(foundMovies);
     $('#movieCards').html("");
@@ -102,17 +97,9 @@ function search(e){
     });
     e.preventDefault();
 }
-
 $('#searchform').submit(search);
 
-function filterSearch(searchType, searchString){
-    
-    let foundMovies = movieArray.filter( movie => movie.searchType.search(/searchString/i) >= 0 )
-    console.log(foundMovies);
-}
-
-
-function displayMovie(movie){
+function displayMovie(movie) {
     $(`#movieCards`).prepend(`
     <div class = 'card m-2' style = 'width: 14rem;'>
         <img class = 'card-img-top' src='${movie.movieImage}' alt = 'movieposter'>
@@ -126,7 +113,7 @@ function displayMovie(movie){
             <div id='${movie.movieId}Collapse' class='collapse'>
                 <div class='form-group mt-3'>
                     <label for='${movie.title}Input'>Movie Title</label>
-                    <input type='text' name="title" id='title-${movie.movieId}' value='${movie.title}' />
+                    <input type='text' name='title' id='title-${movie.movieId}' value='${movie.title}' />
                     <label for='${movie.director}Input' class='mt-2'>Director</label>
                     <input type='text' name='director' id='director-${movie.movieId}' value='${movie.director}' />
                     <label for='${movie.genre}Input' class='mt-2'>Genre</label>
@@ -139,21 +126,21 @@ function displayMovie(movie){
         </div>
     </div>`)
 }
-function editMovieDetails(id) {
 
+function editMovieDetails(id) {
     var dict = {
         MovieId: id,
-        Title: $('#title-'+id).val(),
-        Director: $('#director-'+id).val(),
-        Genre: $('#genre-'+id).val(),
-        MovieImage: $('#movieImage-'+id).val()
+        Title: $('#title-' + id).val(),
+        Director: $('#director-' + id).val(),
+        Genre: $('#genre-' + id).val(),
+        MovieImage: $('#movieImage-' + id).val()
     };
     var putUrl = 'https://localhost:44325/api/movie/';
     console.log(dict);
     console.log(JSON.stringify(dict));
 
     $.ajax({
-        url: putUrl, 
+        url: putUrl,
         type: 'put',
         contentType: 'application/json',
         data: JSON.stringify(dict),
