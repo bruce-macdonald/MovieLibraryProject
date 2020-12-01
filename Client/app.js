@@ -105,6 +105,7 @@ function editMovieDetails(id) {
         contentType: 'application/json',
         data: JSON.stringify(dict),
         success: function (data, textStatus, jQxhr) {
+            location.reload();
 
         },
         error: function (jqXhr, textStatus, errorThrown) {
