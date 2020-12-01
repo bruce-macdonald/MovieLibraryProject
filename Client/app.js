@@ -17,7 +17,7 @@ let movieArray = [];
             success: function (data, textStatus, jQxhr) {
                 $('#response pre').html("Movie successfully added - Title: " + data.title + " - Director: " + data.director + " - Genre: " + data.genre);
                 $(`#movieCards`).prepend(`<div class = 'card' style = 'width: 14rem;'>
-                <img class = 'card-img-top' src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1280px-SNice.svg.png'alt = 'smiley face'>
+                <img class = 'card-img-top' src='${data.movieImage}' alt = 'movie poster'>
                 <div class = 'card-body'> <h5 class = 'card-title'>${data.title}</h5>
                 <a href='#' class='btn btn-primary' id='${data.movieId}-button'>Details / Edit</a>
                 <p class= 'card-text'>ABC</p>
@@ -45,7 +45,7 @@ let movieArray = [];
                 data.forEach(movie => {
                     $(`#movieCards`).prepend(`
                     <div class = 'card m-2' style = 'width: 14rem;'>
-                        <img class = 'card-img-top' src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1280px-SNice.svg.png'alt = 'smiley face'>
+                        <img class = 'card-img-top' src='${movie.movieImage}' alt = 'movieposter'>
                             <div class = 'card-body'>
                             <h5 class = 'card-title'>${movie.title}</h5>
                             <ul class='list-group list-group-flush'>
