@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>jQuery AJAX POST Form</title>
+    <title>Movie DB</title>
     <meta charset="utf-8">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -22,22 +22,32 @@
             /* .card{
                 background-color: #F9F8F1;
             } */
-            </style>
+            #searchform{
+                color:whitesmoke;
+            }
+            #navbarDropdown{
+                color:burlywood;
+            }
+            #searchButton{
+                color:burlywood;
+                border-color:burlywood;
+            }
+        </style>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #395C6B;">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">Movie DB</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-
-
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" onClick="getMovieList()">Home <span class="sr-only">(current)</span></a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,9 +57,13 @@
                             <div class='form-group m-2'>
                                 <form id="my-form">
                                     <input class="dropdown-item" type="text" name="title" placeholder="Title" />
+                                    <div class="dropdown-divider"></div>
                                     <input class="dropdown-item" type="text" name="director" placeholder="Director" />
+                                    <div class="dropdown-divider"></div>
                                     <input class="dropdown-item" type="text" name="genre" placeholder="Genre" />  
-                                    <input class="dropdown-item" type="text" name="movieImage" placeholder="Movie Image URL" />                        
+                                    <div class="dropdown-divider"></div>
+                                    <input class="dropdown-item" type="text" name="movieImage" placeholder="Image URL" />
+                                    <div class="dropdown-divider"></div>                        
                                     <button class="btn btn-primary btn-block" type="submit">Submit</button>
                                 </form>
                             </div>
@@ -58,14 +72,14 @@
 
                 </ul>
                 <form class="form-inline my-2 my-lg-0" id="searchform">
-                    <input type="radio" id="director" name="searchtype" value="director">
-                    <label for="director">Director</label>
-                    <input type="radio" id="title" name="searchtype" value="title">
-                    <label for="title">Title</label>
-                    <input type="radio" id="genre" name="searchtype" value="genre">
-                    <label for="genre">Genre</label>
+                    <input type="radio" id="title" name="searchtype" value="title" class="mr-1">
+                    <label for="title" class="mr-2 ml-1">Title</label>
+                    <input type="radio" id="director" name="searchtype" value="director" class="mr-1">
+                    <label for="director" class="mr-2 ml-1">Director</label>
+                    <input type="radio" id="genre" name="searchtype" value="genre" class="mr-1">
+                    <label for="genre" class="mr-2 ml-1">Genre</label>
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchbox">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit" id="searchButton">Search</button>
                 </form>
             </div>
         </nav>

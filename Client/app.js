@@ -1,99 +1,109 @@
 "use strict"
-let movieArray = [];
+var movieArray = [];
+
 (function ($) {
     getMovieList();
-    function processForm(e) {
-        var dict = {
-            Title: this["title"].value,
-            Director: this["director"].value,
-            Genre: this["genre"].value,
-            MovieImage: this["movieImage"].value
-        };
-
-        $.ajax({
-            url: 'https://localhost:44325/api/movie',
-            dataType: 'json',
-            type: 'post',
-            contentType: 'application/json',
-            data: JSON.stringify(dict),
-            success: function (movie, textStatus, jQxhr) {
-                displayMovie(movie);
-                movieArray.push(movie);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-
-        e.preventDefault();
-    }
-
-    $('#my-form').submit(processForm);
-
-    function getMovieList() {
-        $.ajax({
-            url: 'https://localhost:44325/api/movie',
-            dataType: 'json',
-            type: 'get',
-            contentType: 'application/json',
-            success: function (movies, textStatus, jQxhr) {
-                movies.forEach(movie => {
-                   displayMovie(movie);
-                });
-            movieArray = movies;
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-    }
-
-    function search(){
-        var searchType = this["searchtype"].value;
-        var searchString = this["searchbox"].value.toLowerCase();
-        let foundMovies = [];
-
-        switch(searchType){
-            case'genre':
-            foundMovies = movieArray.filter(function(movie){
-                var genre = movie.genre.toLowerCase();
-                if(genre.search(searchString) >= 0){
-                    return true;
-                }else{
-                    return false;
-                }
-            });
-            break;
-
-            case'director':
-            foundMovies = movieArray.filter(function(movie){
-                var director = movie.director.toLowerCase();
-                if(director.search(searchString) >= 0){
-                    return true;
-                }else{
-                    return false;
-                }
-            });
-            break;
-
-            case'title':
-            foundMovies = movieArray.filter(function(movie){
-                var title = movie.title.toLowerCase();
-                if(title.search(searchString) >= 0){
-                    return true;
-                }else{
-                    return false;
-                }
-            });
-            break;
-
-        }
-        console.log(foundMovies)
-    }
-
-    $('#searchform').submit(search);
 }
 )(jQuery);
+
+function processForm(e) {
+    var dict = {
+        Title: this["title"].value,
+        Director: this["director"].value,
+        Genre: this["genre"].value,
+        MovieImage: this["movieImage"].value
+    };
+
+    $.ajax({
+        url: 'https://localhost:44325/api/movie',
+        dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(dict),
+        success: function (movie, textStatus, jQxhr) {
+            displayMovie(movie);
+            movieArray.push(movie);
+            $('#my-form')[0].reset();
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+
+    e.preventDefault();
+}
+
+$('#my-form').submit(processForm);
+
+function getMovieList() {
+    $.ajax({
+        url: 'https://localhost:44325/api/movie',
+        dataType: 'json',
+        type: 'get',
+        contentType: 'application/json',
+        success: function (movies, textStatus, jQxhr) {
+            movieArray = movies;
+            $('#movieCards').html("");
+            movieArray.forEach(movie => {
+               displayMovie(movie);
+            });
+
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+
+function search(e){
+    var searchType = this["searchtype"].value;
+    var searchString = this["searchbox"].value.toLowerCase();
+    let foundMovies = [];
+
+    switch(searchType){
+        case'genre':
+        foundMovies = movieArray.filter(function(movie){
+            var genre = movie.genre.toLowerCase();
+            if(genre.search(searchString) >= 0){
+                return true;
+            }else{
+                return false;
+            }
+        });
+        break;
+
+        case'director':
+        foundMovies = movieArray.filter(function(movie){
+            var director = movie.director.toLowerCase();
+            if(director.search(searchString) >= 0){
+                return true;
+            }else{
+                return false;
+            }
+        });
+        break;
+
+        case'title':
+        foundMovies = movieArray.filter(function(movie){
+            var title = movie.title.toLowerCase();
+            if(title.search(searchString) >= 0){
+                return true;
+            }else{
+                return false;
+            }
+        });
+        break;
+
+    }
+    console.log(foundMovies);
+    $('#movieCards').html("");
+    foundMovies.forEach(movie => {
+        displayMovie(movie);
+    });
+    e.preventDefault();
+}
+
+$('#searchform').submit(search);
 
 function filterSearch(searchType, searchString){
     
