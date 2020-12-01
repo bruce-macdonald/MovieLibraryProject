@@ -57,8 +57,14 @@
                     </li>
 
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="form-inline my-2 my-lg-0" id="searchform">
+                    <input type="radio" id="director" name="searchtype" value="director">
+                    <label for="director">Director</label>
+                    <input type="radio" id="title" name="searchtype" value="title">
+                    <label for="title">Title</label>
+                    <input type="radio" id="genre" name="searchtype" value="genre">
+                    <label for="genre">Genre</label>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchbox">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>

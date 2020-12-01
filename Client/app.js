@@ -47,8 +47,60 @@ let movieArray = [];
             }
         });
     }
+
+    function search(){
+        var searchType = this["searchtype"].value;
+        var searchString = this["searchbox"].value.toLowerCase();
+        let foundMovies = [];
+
+        switch(searchType){
+            case'genre':
+            foundMovies = movieArray.filter(function(movie){
+                var genre = movie.genre.toLowerCase();
+                if(genre.search(searchString) >= 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+            break;
+
+            case'director':
+            foundMovies = movieArray.filter(function(movie){
+                var director = movie.director.toLowerCase();
+                if(director.search(searchString) >= 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+            break;
+
+            case'title':
+            foundMovies = movieArray.filter(function(movie){
+                var title = movie.title.toLowerCase();
+                if(title.search(searchString) >= 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+            break;
+
+        }
+        console.log(foundMovies)
+    }
+
+    $('#searchform').submit(search);
 }
 )(jQuery);
+
+function filterSearch(searchType, searchString){
+    
+    let foundMovies = movieArray.filter( movie => movie.searchType.search(/searchString/i) >= 0 )
+    console.log(foundMovies);
+}
+
 
 function displayMovie(movie){
     $(`#movieCards`).prepend(`
