@@ -1,5 +1,5 @@
+let movieArray = [];
 (function ($) {
-    let movieArray = [];
     getMovieList();
     function processForm(e) {
         var dict = {
@@ -58,13 +58,13 @@
                             
                             <div class='form-group mt-3'>
                             <label for='${movie.title}Input'>Movie Title</label>
-                            <input type="text" name="title" id='title-${movie.movieId}' placeholder="${movie.title}" />
+                            <input type="text" name="title" id='title-${movie.movieId}' value="${movie.title}" />
                             <br>
                             <label for='${movie.director}Input' class='mt-2'>Director</label>
-                            <input type="text" name="director" id='director-${movie.movieId}' placeholder="${movie.director}" />
+                            <input type="text" name="director" id='director-${movie.movieId}' value="${movie.director}" />
                             <br>
                             <label for='${movie.genre}Input' class='mt-2'>Genre</label>
-                            <input type="text" name="genre" id='genre-${movie.movieId}' placeholder="${movie.genre}" />
+                            <input type="text" name="genre" id='genre-${movie.movieId}' value="${movie.genre}" />
 
                             <button onclick='editMovieDetails(${movie.movieId})'  class='btn btn-danger mt-3'>Confirm Change</button>
                             </div>
@@ -83,34 +83,33 @@
 
     }
 
-
-
-    function editMovieDetails(id) {
-        var title = $('#title-'+ id ).value();
-        console.log(title);
-        var dict = {
-            Title: $('#title-'+id),
-            Director: data.director,
-            Genre: data.genre
-        };
-
-        $.ajax({
-            url: 'https://localhost:44325/api/movie', 
-            dataType: 'json',
-            type: 'put',
-            contentType: 'application/json',
-            data: JSON.stringify(dict),
-            success: function (data, textStatus, jQxhr) {
-
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-
-        e.preventDefault();
-    }
-
-
 }
 )(jQuery);
+
+
+function editMovieDetails(id) {
+
+    var dict = {
+        MovieId: id,
+        Title: $('#title-'+id).val(),
+        Director: $('#director-'+id).val(),
+        Genre: $('#genre-'+id).val()
+    };
+    var putUrl = 'https://localhost:44325/api/movie/';
+    console.log(dict);
+    console.log(JSON.stringify(dict));
+
+    $.ajax({
+        url: putUrl, 
+        type: 'put',
+        contentType: 'application/json',
+        data: JSON.stringify(dict),
+        success: function (data, textStatus, jQxhr) {
+
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+
+}
