@@ -122,7 +122,7 @@ function displayMovie(movie){
                 <li class='list-group-item'>Director: ${movie.director}</li>
                 <li class='list-group-item'>Genre: ${movie.genre}</li>
             </ul>
-            <a href='#${movie.movieId}Collapse' class='btn btn-primary mt-2' data-toggle='collapse' aria-expanded='false' aria-controls='collapseExample' role='button' id='${movie.movieId}-button'>Edit</a>
+            <a href='#${movie.movieId}Collapse' class='btn btn-primary mt-2 btn-block' data-toggle='collapse' aria-expanded='false' aria-controls='collapseExample' role='button' id='${movie.movieId}-button'>Edit</a>
             <div id='${movie.movieId}Collapse' class='collapse'>
                 <div class='form-group mt-3'>
                     <label for='${movie.title}Input'>Movie Title</label>
@@ -133,7 +133,7 @@ function displayMovie(movie){
                     <input type='text' name='genre' id='genre-${movie.movieId}' value='${movie.genre}' />
                     <label for='${movie.movieImage}Input' class='mt-2'>Movie Poster</label>
                     <input type='text' name='movieImage' id='movieImage-${movie.movieId}' value='${movie.movieImage}' />
-                    <button onclick='editMovieDetails(${movie.movieId})'  class='btn btn-danger mt-3'>Confirm Change</button>
+                    <button onclick='editMovieDetails(${movie.movieId})'  class='btn btn-danger mt-3 btn-block'>Confirm Change</button>
                 </div>
             </div>
         </div>
